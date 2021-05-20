@@ -32,13 +32,6 @@ Range("K1").Value = "Yearly Change"
 Range("L1").Value = "Percent Change"
 Range("M1").Value = "Total Stock Volume"
 
-'Set Bonus Summary headers
-Range("P2").Value = "Greatest % Increase"
-Range("P3").Value = "Greatest % Decrease"
-Range("P4").Value = "Greatest Total Volume"
-Range("Q1").Value = "Ticker"
-Range("R1").Value = "Value"
-
 'Test of Last Row Output
 'MsgBox (LastRow)
 
@@ -51,16 +44,6 @@ Range("R1").Value = "Value"
 
                 ' Add to the Stock Volume Total for the final row
                 StockVol = StockVol + Cells(i, 7).Value
-
-                    'Compares total stock volume for a stock to current max stcok volume value
-                    'If conditional checks for a higher value to replace greatest total volume
-                    'Stores ticker with the highest volume for output to Bonus Table
-                    If StockVol > MaxStockVol Then
-      
-                    MaxStockVol = StockVol
-                    Range("Q4").Value = TickerName
-        
-                    End If
     
                 'Set Open Price Variable using OpenRow variable to set starting point
                 Dim OpenPrice As Double
@@ -91,21 +74,6 @@ Range("R1").Value = "Value"
       
                 End If
             
-                
-                'If conditional checks for the highest and lowest % in the summary table as the loop runs
-                'Highest and lowest values are stored for output later
-                If PercentChange > MaxInc Then
-      
-                    MaxInc = PercentChange
-                    Range("Q2").Value = TickerName
-        
-                ElseIf PercentChange < MaxDec Then
-    
-                    MaxDec = PercentChange
-                    Range("Q3").Value = TickerName
-    
-                End If
-      
                 ' Print the Ticker in the Summary Table
                 Range("J" & Summary_Table_Row).Value = TickerName
       
@@ -115,17 +83,6 @@ Range("R1").Value = "Value"
                 'Print Percentage Change in Summary Table
                 Range("L" & Summary_Table_Row).NumberFormat = "0.00%"
                 Range("L" & Summary_Table_Row).Value = PercentChange
-                
-                'Print Greatest % Increase, converted to percentage with 2 decimal places
-                Range("R2").NumberFormat = "0.00%"
-                Range("R2").Value = MaxInc
-      
-                'Print Greatest % Decrease, converted to percentage with 2 decimal places
-                Range("R3").NumberFormat = "0.00%"
-                Range("R3").Value = MaxDec
-                
-                'Print Greatest Total Stock VOlume to Bonus Summary table
-                Range("R4").Value = MaxStockVol
       
                 'Conditional formatting here sets those with no loss or a profit based on percentage to green squares
                 'Squares with a negative percentage are set to red
@@ -161,9 +118,5 @@ Range("R1").Value = "Value"
 
         Next i
         
-    'Reset Max Values for next worksheet
-    MaxDec = 0
-    MaxInc = 0
-    MaxStockVol = 0
 
 End Sub
